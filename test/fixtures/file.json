@@ -1,0 +1,51 @@
+[
+  {
+    "type": "file",
+    "spec_version": "2.1",
+    "id": "file--e277603e-1060-5ad4-9937-c26c97f1ca68",
+    "hashes": {
+      "SHA-256": "fe90a7e910cb3a4739bed9180e807e93fa70c90f25a8915476f5e4bfbac681db"
+    },
+    "size": 25536,
+    "name": "foo.dll"
+  },
+  {
+    "type": "file",
+    "spec_version": "2.1",
+    "id": "file--90bd400b-89a5-51a5-b17d-55bc7719723b",
+    "hashes": {
+      "SHA-256": "841a8921140aba50671ebb0770fecc4ee308c4952cfeff8de154ab14eeef4649"
+    },
+    "name": "quêry.dll",
+    "name_enc": "windows-1252"
+  },
+  {
+    "type": "file",
+    "spec_version": "2.1",
+    "id": "file--5a27d487-c542-5f97-a131-a8866b477b46",
+    "hashes": {
+      "SHA-256": "ceafbfd424be2ca4a5f0402cae090dda2fb0526cf521b60b60077c0f622b285a"
+    },
+    "parent_directory_ref": "directory--93c0a9b0-520d-545d-9094-1a08ddf46b05",
+    "name": "qwerty.dll"
+  },
+  {
+    "type": "file",
+    "spec_version": "2.1",
+    "id": "file--9a1f834d-2506-5367-baec-7aa63996ac43",
+    "name": "foo.zip",
+    "hashes": {
+      "SHA-256": "35a01331e9ad96f751278b891b6ea09699806faedfa237d40513d92ad1b7100f"
+    },
+    "mime_type": "application/zip",
+    "extensions": {
+      "archive-ext": {
+        "contains_refs": [
+          "file--019fde1c-94ca-5967-8b3c-a906a51d87ac",
+          "file--94fc2163-dec3-5715-b824-6e689c4de865",
+          "file--d07ff290-d7e0-545b-a2ff-04602a9e0b73"
+        ]
+      }
+    }
+  }
+]

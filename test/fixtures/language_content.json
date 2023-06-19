@@ -1,0 +1,37 @@
+[
+  {
+    "type": "language-content",
+    "id": "language-content--b86bd89f-98bb-4fa9-8cb2-9ad421da981d",
+    "spec_version": "2.1",
+    "created": "2017-02-08T21:31:22.007Z",
+    "modified": "2017-02-08T21:31:22.007Z",
+    "object_ref": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
+    "object_modified": "2017-02-08T21:31:22.007Z",
+    "contents": {
+      "de": {
+        "name": "Bank Angriff",
+        "description": "Weitere Informationen über Banküberfall"
+      },
+      "fr": {
+        "name": "Attaque Bank",
+        "description": "Plus d'informations sur la crise bancaire"
+      }
+    }
+  },
+  {
+    "type": "language-content",
+    "id": "language-content--0911f616-727f-48cb-a4c5-9420299562a4",
+    "spec_version": "2.1",
+    "created": "2019-06-08T21:31:22.007Z",
+    "modified": "2019-07-08T21:31:22.007Z",
+    "object_ref": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
+    "contents": {
+      "de": {
+        "goals": ["Bankgeld stehlen", "Kreditkarten stehlen"]
+      },
+      "fr": {
+        "goals": ["Voler de l'argent en banque", ""]
+      }
+    }
+  }
+]

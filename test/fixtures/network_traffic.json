@@ -1,0 +1,30 @@
+[
+  {
+    "type": "network-traffic",
+    "spec_version": "2.1",
+    "id": "network-traffic--2568d22a-8998-58eb-99ec-3c8ca74f527d",
+    "src_ref": "ipv4-addr--4d22aae0-2bf9-5427-8819-e4f6abf20a53",
+    "dst_ref": "ipv4-addr--ff26c055-6336-5bc5-b98d-13d6226742dd",
+    "protocols": [
+      "tcp"
+    ]
+  },
+  {
+    "type": "network-traffic",
+    "spec_version": "2.1",
+    "id": "network-traffic--ac267abc-1a41-536d-8e8d-98458d9bf491",
+    "src_ref": "ipv4-addr--4d22aae0-2bf9-5427-8819-e4f6abf20a53",
+    "dst_ref": "ipv4-addr--e42c19c8-f9fe-5ae9-9fc8-22c398f78fb7",
+    "src_port": 2487,
+    "dst_port": 1723,
+    "protocols": [
+      "ipv4",
+      "pptp"
+    ],
+    "src_byte_count": 35779,
+    "dst_byte_count": 935750,
+    "encapsulates_refs": [
+      "network-traffic--53e0bf48-2eee-5c03-8bde-ed7049d2c0a3"
+    ]
+  }
+]

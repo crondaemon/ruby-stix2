@@ -1,0 +1,14 @@
+[
+  { 
+    "type": "ipv6-addr",
+    "spec_version": "2.1",
+    "id": "ipv6-addr--1e61d36c-a16c-53b7-a80f-2a00161c96b1",
+    "value": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+  },
+  {
+    "type": "ipv6-addr",
+    "spec_version": "2.1",
+    "id": "ipv6-addr--5daf7456-8863-5481-9d42-237d477697f4",
+    "value": "2001:0db8::/96"
+  }
+]
