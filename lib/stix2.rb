@@ -3,7 +3,6 @@ require 'json'
 require 'time'
 
 require 'stix2/version'
-require 'stix2/boolean'
 require 'stix2/external_reference'
 require 'stix2/identifier'
 require 'stix2/kill_chain_phase'
@@ -96,6 +95,12 @@ module Stix2
       return Module.const_get(class_name).new(options_) if Module.const_defined?(class_name)
     end
     raise("Message unsupported: #{type}")
+  end
+
+  def self.to_bool(value)
+    return true if value == true
+    return true if value == 'true'
+    false
   end
 end
 
