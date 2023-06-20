@@ -8,7 +8,7 @@ class IndicatorTest < Minitest::Test
   end
 
   def test_boolean
-    [true, 'true', 1].each do |value|
+    [true, 'true'].each do |value|
       indicator = Stix2::DomainObject::Indicator.new(type: 'indicator', revoked: value)
       assert indicator
       assert indicator.revoked

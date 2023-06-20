@@ -10,14 +10,14 @@ module Stix2
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
     property :modified, coerce: Time
-    property :revoked, coerce: Stix2::Boolean
+    property :revoked, coerce: ->(value){ Stix2.to_bool(value) }
     property :labels, coerce: Array[String]
     property :confidence, coerce: Integer
     property :lang, coerce: String
     property :external_references, coerce: Array[ExternalReference]
     property :object_marking_refs, coerce: Array[Stix2::MetaObject::DataMarking::ObjectMarking]
     property :granular_markings, coerce: Array[MetaObject::DataMarking::GranularMarking]
-    property :defanged, coerce: Stix2::Boolean
+    property :defanged, coerce: ->(value){ Stix2.to_bool(value) }
     property :extensions, coerce: Hash
 
     def initialize(options = {})
