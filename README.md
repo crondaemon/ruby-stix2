@@ -12,7 +12,7 @@ gem install ruby-stix2
 or as part of the bundle
 
 ```
-bundle add typhoeus
+bundle add ruby-stix2
 ```
 
 # Usage
@@ -82,7 +82,7 @@ For any Stix2 attribute that is an `identifier` (`Stix2::Identifier` in the gem)
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
   "modified": "2016-04-06T20:03:48.000Z",
-  "threat_actor_types": [ "crime-syndicate"],
+  "threat_actor_types": ["crime-syndicate"],
   "name": "Evil Org",
   "description": "The Evil Org threat actor group",
   "aliases": ["Syndicate 1", "Evil Syndicate 99"],
