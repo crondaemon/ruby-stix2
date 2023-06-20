@@ -1,7 +1,6 @@
 require 'hashie'
 require 'json'
 require 'time'
-require 'pry' # TO REMOVE
 
 require 'stix2/version'
 require 'stix2/boolean'

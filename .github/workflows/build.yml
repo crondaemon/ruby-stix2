@@ -1,0 +1,31 @@
+name: Ruby Gem
+
+on:
+  push:
+    branches: '**'
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        ruby: ['2.7', '3.0', '3.1', head]
+    runs-on: ${{ matrix.os }}
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler: latest
+    - run: bundle
+    - run: bundle exec rake test
+    - name: SimpleCov Ruby ${{ matrix.ruby }}
+      uses: joshmfrankel/simplecov-check-action@main
+      if: ${{ matrix.os == 'ubuntu-latest' && matrix.ruby == '3.1' }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        check_job_name: SimpleCov ${{ matrix.ruby }}
+    - run: bundle exec gem build
