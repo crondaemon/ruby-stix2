@@ -33,7 +33,10 @@ module Stix2
     end
 
     def method_missing(m, *args, &block)
-      super(m, args, block) if !m.to_s.end_with?('_instance')
+      if !m.to_s.end_with?('_instance')
+        super(m, args, block)
+        return
+      end
       # Retrieve the original method
       ref_method = m.to_s.gsub(/_instance$/, '')
       obj = send(ref_method)
