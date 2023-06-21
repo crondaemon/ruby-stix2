@@ -107,6 +107,15 @@ threat_actor.created_by_ref # this gives the identifier => identity--f431f809-37
 threat_actor.created_by_ref_instance # this gives the actual object => Stix2::DomainObject::Identity
 ```
 
+# Spec versions
+
+This gem implements the spec version `2.1`. However older version (especially 2.0) can be compatible. To force the gem
+to accept another spec version, just add them to the `SPEC_VERSIONS` variable.
+
+```ruby
+Stix2::SPEC_VERSIONS << '2.0'
+```
+
 # Contribution
 
 You can contribute to this project in 2 ways:
