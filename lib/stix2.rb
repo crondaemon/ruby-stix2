@@ -89,9 +89,9 @@ module Stix2
     type = options_[:type]
     raise("Property 'type' is missing") if !type
     # Let's try to guess the domain of the object, among the known ones
-    ['DomainObject', 'RelationshipObject', 'CyberobservableObject', 'MetaObject', 
+    [nil, 'DomainObject', 'RelationshipObject', 'CyberobservableObject', 'MetaObject',
       'MetaObject::DataMarking'].each do |family|
-      class_name = "Stix2::#{family}::#{type.split('-').map(&:capitalize).join}"
+      class_name = ['Stix2', family, type.split('-').map(&:capitalize).join].compact.join('::')
       return Module.const_get(class_name).new(options_) if Module.const_defined?(class_name)
     end
     raise("Message unsupported: #{type}")
