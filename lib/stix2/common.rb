@@ -1,11 +1,13 @@
 module Stix2
+  SPEC_VERSIONS = ['2.1']
+
   class Common < Hashie::Dash
     include Hashie::Extensions::Dash::PredefinedValues
     include Hashie::Extensions::IndifferentAccess
     include Hashie::Extensions::Dash::Coercion
 
     property :type, required: true, coerce: String
-    property :spec_version, coerce: String, values: ['2.1']
+    property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS
     property :id, coerce: Identifier
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
@@ -34,8 +36,10 @@ module Stix2
 
     def method_missing(m, *args, &block)
       if !m.to_s.end_with?('_instance')
+        # :nocov:
         super(m, args, block)
         return
+        # :nocov:
       end
       # Retrieve the original method
       ref_method = m.to_s.gsub(/_instance$/, '')
