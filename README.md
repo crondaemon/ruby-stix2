@@ -123,3 +123,7 @@ You can contribute to this project in 2 ways:
 - with a PR: just follow the standard github workflow
 - by pointing out missing support: open an issue and please provide a json containing the missing support, to simplify
 the development
+
+# See also
+
+Ruby Stix2: https://github.com/crondaemon/ruby-taxii2
