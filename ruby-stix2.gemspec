@@ -6,15 +6,17 @@ require 'stix2/version'
 Gem::Specification.new do |spec|
   spec.name        = "ruby-stix2"
   spec.version     = Stix2::VERSION
-  spec.summary     = "Ruby implementation for the STIX protocol version 2"
-  spec.description = "Ruby implementation for the STIX protocol version 2"
+  spec.summary     = "Ruby implementation for the STIX protocol version 2.1"
+  spec.description = "Ruby implementation for the STIX protocol version 2.1. Full specs: https://docs.oasis-open.org/cti/stix/v2.1/stix-v2.1.html"
   spec.authors     = ["Dario Lombardo"]
   spec.email       = "lomato@gmail.com"
 
   spec.require_paths = ['lib']
-  spec.files       = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.homepage    = "https://rubygemspec.org/gems/stix2"
-  spec.license     = "GPL-2.0-or-later"
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.homepage      = "https://rubygemspec.org/gems/stix2"
+  spec.license       = "GPL-2.0-or-later"
+  spec.require_paths = ['lib']
+
 
   spec.add_dependency 'hashie', '~> 5.0.0'
 
