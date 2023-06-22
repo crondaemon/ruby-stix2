@@ -1,9 +1,5 @@
 module Stix2
-  class ExternalReference < Hashie::Dash
-    include Hashie::Extensions::Dash::PredefinedValues
-    include Hashie::Extensions::IndifferentAccess
-    include Hashie::Extensions::Dash::Coercion
-
+  class ExternalReference < Stix2::Base
     property :source_name, coerce: String, required: true
     property :description, coerce: String
     property :url, coerce: String

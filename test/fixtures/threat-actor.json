@@ -1,5 +1,5 @@
 [
-	{
+  {
     "type": "threat-actor",
     "spec_version": "2.1",
     "id": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
@@ -14,6 +14,10 @@
     "goals": ["Steal bank money", "Steal credit cards"],
     "sophistication": "advanced",
     "resource_level": "team",
-    "primary_motivation": "organizational-gain"
+    "primary_motivation": "organizational-gain",
+    "secondary_motivations": ["organizational-gain"],
+    "personal_motivations": ["organizational-gain"],
+    "threat_actor_types": ["activist"],
+    "roles": ["agent"]
   }
 ]

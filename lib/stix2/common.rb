@@ -1,11 +1,7 @@
 module Stix2
   SPEC_VERSIONS = ['2.1']
 
-  class Common < Hashie::Dash
-    include Hashie::Extensions::Dash::PredefinedValues
-    include Hashie::Extensions::IndifferentAccess
-    include Hashie::Extensions::Dash::Coercion
-
+  class Common < Stix2::Base
     property :type, required: true, coerce: String
     property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS
     property :id, coerce: Identifier
@@ -55,14 +51,13 @@ module Stix2
     end
 
     def self.validate_array(list, valid_values)
-      excess = (Array(list) - valid_values)
+      excess = (Array(list).map(&:to_s) - valid_values.map(&:to_s))
       excess.empty? || raise("Invalid values: #{excess}")
       list
     end
 
     def self.hash_dict(hsh)
-      invalids = hsh.keys.map(&:to_s) - HASH_ALGORITHM_OV
-      invalids.empty? || raise("Invalid values: #{invalids}")
+      validate_array(hsh.keys, HASH_ALGORITHM_OV)
       hsh
     end
   end
