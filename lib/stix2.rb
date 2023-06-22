@@ -8,6 +8,7 @@ require 'stix2/identifier'
 require 'stix2/kill_chain_phase'
 require 'stix2/ov'
 require 'stix2/enum'
+require 'stix2/languages'
 
 require 'stix2/meta_objects/data_markings/granular_marking'
 require 'stix2/meta_objects/data_markings/object_marking'
