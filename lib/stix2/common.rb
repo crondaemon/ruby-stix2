@@ -16,7 +16,14 @@ module Stix2
     property :object_marking_refs, coerce: Array[Stix2::MetaObject::DataMarking::ObjectMarking]
     property :granular_markings, coerce: Array[MetaObject::DataMarking::GranularMarking]
     property :defanged, coerce: ->(value){ Stix2.to_bool(value) }
-    property :extensions, coerce: Hash
+    property :extensions, coerce: ->(hsh) do
+      hsh.each do |key, value|
+        if key.to_s.start_with?('extension-definition')
+          Stix2::EXTENSION_TYPE_ENUM.include?(Hashie.symbolize_keys(value)[:extension_type]) ||
+            raise("Invalid key: #{key}")
+        end
+      end  
+    end
 
     def initialize(options = {})
       Hashie.symbolize_keys!(options)

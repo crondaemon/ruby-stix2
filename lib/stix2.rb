@@ -67,6 +67,7 @@ require 'stix2/meta_objects/language_content'
 require 'stix2/meta_objects/data_markings/base'
 require 'stix2/meta_objects/data_markings/marking_definition'
 
+require 'stix2/extension_definition'
 require 'stix2/bundle'
 
 require 'stix2/storage'

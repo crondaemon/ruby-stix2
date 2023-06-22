@@ -29,4 +29,12 @@ module Stix2
     'REG_QWORD',
     'REG_INVALID_TYPE'
   ].freeze
+
+  EXTENSION_TYPE_ENUM = [
+    'new-sdo',
+    'new-sco',
+    'new-sro',
+    'property-extension',
+    'toplevel-property-extension'
+  ].freeze
 end
