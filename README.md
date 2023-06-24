@@ -69,7 +69,7 @@ Stix2 message.
 # Storage
 
 The Stix2 standard has several object types, some of which are containers of other objects (like `Bundle`). However we
-may want to save and retrieve Stix2 objects in a fast way. The gem provides a `storage` support for that.
+may want to save and retrieve Stix2 objects in a fast way. The gem provides a `Stix::Storage` support for that.
 
 For any Stix2 attribute that is an `identifier` (`Stix2::Identifier` in the gem) the class gives one more method called
 `_instance` to retrieve the actual instance. If we have a `threat-actor` like this
@@ -98,7 +98,7 @@ we know that this object has been created by an identity `identity--f431f809-377
 retrieve the other object if already seen
 
 ```ruby
-Stix2.storage_activate # Activate the storage
+Stix2::Storage.activate # Activate the storage
 
 identity = Stix2::DomainObject::Identity.new(id: 'identity--f431f809-377b-45e0-aa1c-6a4751cae5ff', ...)
 threat_actor = Stix2::DomainObject::ThreatActor.new(created_by_ref: 'identity--f431f809-377b-45e0-aa1c-6a4751cae5ff', ...)

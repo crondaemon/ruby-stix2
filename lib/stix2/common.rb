@@ -27,7 +27,7 @@ module Stix2
         options[:type] = type
       end
       super(options)
-      Stix2.storage_add(self)
+      Stix2::Storage.add(self)
     end
 
     def method_missing(m, *args, &block)
@@ -41,7 +41,7 @@ module Stix2
       ref_method = m.to_s.gsub(/_instance$/, '')
       obj = send(ref_method)
       raise("Can't get a Stix2::Identifier from #{ref_method}") if !obj.is_a?(Stix2::Identifier)
-      Stix2.storage_find(obj)
+      Stix2::Storage.find(obj)
     end
 
     private
