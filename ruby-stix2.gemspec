@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.license       = "GPL-2.0-or-later"
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.7'
 
   spec.add_dependency 'hashie', '~> 5.0.0'
 
