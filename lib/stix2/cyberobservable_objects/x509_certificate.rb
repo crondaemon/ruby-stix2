@@ -1,3 +1,5 @@
+require 'stix2/cyberobservable_objects/x509_v3_extension_type'
+
 module Stix2
   module CyberobservableObject
     class X509Certificate < Base

@@ -59,7 +59,6 @@ require 'stix2/cyberobservable_objects/url'
 require 'stix2/cyberobservable_objects/user_account'
 require 'stix2/cyberobservable_objects/windows_registry_value'
 require 'stix2/cyberobservable_objects/windows_registry_key'
-require 'stix2/cyberobservable_objects/x509_v3_extension_type'
 require 'stix2/cyberobservable_objects/x509_certificate'
 
 require 'stix2/meta_objects/base'
