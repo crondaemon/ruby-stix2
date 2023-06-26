@@ -14,10 +14,10 @@ class Stix2Test < Stix2::Test
       :domain_name, :email_addr, :email_message, :email_mime_part_type, :file, :ipv4_addr, :ipv6_addr, :mac_addr,
       :mutex, :network_traffic, :software, :url, :user_account, :windows_registry_key, :x509_certificate,
       :language_content, :marking_definition].each do |name|
-      binding.pry if name == :object_marking
       stix_messages(name).each do |message|
         assert Stix2.parse(message)
       end
+      assert_raises{ Stix2::DomainObject::Indicator.new(type: 'pippo') }
     end
   end
 
@@ -52,5 +52,17 @@ class Stix2Test < Stix2::Test
     assert_equal identity, ta.created_by_ref_instance
     assert Stix2::Storage.inspect
     Stix2::Storage.deactivate
+  end
+
+  def test_custom_object
+    assert Stix2::CustomObject.new(stix_messages('custom_object'))
+    assert Stix2.parse(stix_messages('custom_object'))
+    assert_raises{ Stix2::CustomObject.new(type: 'pippo') }
+    errors = assert_raises(RuntimeError){
+      Stix2::CustomObject.new(type: 'x-type', p1: 'p1', PR2: 'PR2', ('pr3' * 200) => 'pr3')
+    }
+    message = errors.message.match("{(.*)}")[0]
+    error_hash = eval(message)
+    assert ["Too short", "Invalid name", "Too long"], error_hash.keys
   end
 end

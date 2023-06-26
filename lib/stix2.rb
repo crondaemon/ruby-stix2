@@ -81,6 +81,7 @@ require 'stix2/extensions/pdf'
 require 'stix2/extensions/raster_image'
 require 'stix2/extensions/windows_pebinary'
 
+require 'stix2/custom_object'
 require 'stix2/bundle'
 
 require 'stix2/storage'
@@ -107,7 +108,11 @@ module Stix2
     # Let's try to guess the domain of the object, among the known ones
     [nil, 'DomainObject', 'RelationshipObject', 'CyberobservableObject', 'MetaObject',
       'MetaObject::DataMarking'].each do |family|
-      class_name = ['Stix2', family, type.split('-').map(&:capitalize).join].compact.join('::')
+      if type.start_with?('x-')
+        class_name = 'Stix2::CustomObject'
+      else
+        class_name = ['Stix2', family, type.split('-').map(&:capitalize).join].compact.join('::')
+      end
       return Module.const_get(class_name).new(options_) if Module.const_defined?(class_name)
     end
     raise("Message unsupported: #{type}")

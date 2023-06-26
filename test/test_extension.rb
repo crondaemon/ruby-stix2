@@ -22,7 +22,7 @@ class ExtensionTest < Stix2::Test
     )
     assert extension_definition
 
-    indicator = Stix2::DomainObject::Indicator.new(
+    assert Stix2::DomainObject::Indicator.new(
       "type": "indicator",
       "spec_version": "2.1",
       "id": "indicator--66a63e16-92d7-4b2f-bd3d-21540d6b3fc7",

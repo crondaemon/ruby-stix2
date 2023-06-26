@@ -22,7 +22,9 @@ module Stix2
       Hashie.symbolize_keys!(options)
       type = to_dash(self.class.name.split('::').last)
       if options[:type]
-        raise("Property 'type' must be '#{type}'") if options[:type] != type
+        if !options[:type].start_with?('x-') && options[:type] != type
+          raise("Property 'type' must be '#{type}'")
+        end
       else
         options[:type] = type
       end
