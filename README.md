@@ -116,6 +116,39 @@ to accept another spec version, just add them to the `SPEC_VERSIONS` variable.
 Stix2::SPEC_VERSIONS << '2.0'
 ```
 
+# Custom Definitions
+
+The Stix2 standard includes several extensions to base objects. All extensions are widely described in the standard 
+itself, please refer to it. However two of them need more attention for how they are implemented in this gem.
+
+## Extension Definition
+
+This object allows the definition of new properties. One special property is `toplevel-property-extension` that allows
+the definition of properties on the top-level of an object. According to the standard thos properties should be
+defined solely on the object that is actually using the property. However due to the `hashie`-based implementation
+the gem declares the new properties on the class itself. This is a known limitation of the current implementation and
+it may be fixed in the future.
+
+## Custom Object
+
+A `CustomObject` can also be used within the Gem. The standard defines the rules that must be fulfilled for a custom
+object. Since those rules are several, the code stacks all the errors altogether and raises an exception when some
+errors happen. The exception is RuntimeError, that gives the user a string. It is suboptimal to have multiple errors
+in a string, and it may be fixed in the future.
+
+# Confidence
+
+A Stix2 object can have the property `confidence` set. This value can be expressed according to several conficence 
+scales. To make this conversion smooth, an object offers the method `confidence_scale` that is an instance of
+`Stix2::ConfidenceScale`. This class offers method for all the scales the standard includes.
+
+```ruby
+indicator = Stix2::DomainObject::Indicator.new(confidence: i)
+indicator.confidence # This is the raw integer
+indicator.confidence_scale.to_admiralty_credibility # this is a string in this scale
+indicator.confidence_scale.to_admiralty_credibility_strix # this is a string in stix mode
+```
+
 # Contribution
 
 You can contribute to this project in 2 ways:
