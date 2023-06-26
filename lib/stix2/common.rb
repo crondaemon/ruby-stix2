@@ -17,24 +17,6 @@ module Stix2
     property :granular_markings, coerce: Array[MetaObject::DataMarking::GranularMarking]
     property :defanged, coerce: ->(value){ Stix2.to_bool(value) }
     property :extensions, coerce: Hash
-    #  ->(hsh) do
-    #   hsh.each do |key, value|
-    #     key.match?(/^[a-z0-9-]*$/) || raise('Invalid extension name format')
-    #     value_ = Hashie.symbolize_keys(value)
-    #     case key
-    #     when /^extension-definition/
-    #       require 'pry'
-    #       binding.pry
-    #       ExtensionDefinition.new(value)
-    #     when 'archive-ext'
-    #       Stix2::Extensions::ArchiveFile.new(value)
-    #     when 'ntfs-ext'
-    #       value_[:alternate_data_streams].is_a?(Array) || raise('alternate_data_streams must be Array')
-    #     # when 
-    #     end
-    #   end
-    #   hsh
-    # end
 
     def initialize(options = {})
       Hashie.symbolize_keys!(options)
