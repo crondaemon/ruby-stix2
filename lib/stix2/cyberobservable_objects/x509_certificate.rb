@@ -1,7 +1,9 @@
+require 'stix2/cyberobservable_objects/x509_v3_extension_type'
+
 module Stix2
   module CyberobservableObject
     class X509Certificate < Base
-      property :is_self_signed, coerce: ->(v){ boolean(v) }
+      property :is_self_signed, coerce: ->(v){ Stix2.to_bool(v) }
       property :hashes, coerce: ->(hsh){ hash_dict(hsh) }
       property :version, coerce: String
       property :serial_number, coerce: String

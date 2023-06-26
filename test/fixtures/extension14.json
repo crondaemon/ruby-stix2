@@ -1,0 +1,12 @@
+{
+  "type": "file",
+  "hashes": {
+    "SHA-256": "effb46bba03f6c8aea5c653f9cf984f170dcdd3bbbe2ff6843c3e5da0e698766"
+  },
+  "extensions": {
+    "x-example-com-foo": {
+      "foo_val": "foo",
+      "bar_val": "bar"
+    }
+  }
+}

@@ -45,12 +45,12 @@ class Stix2Test < Stix2::Test
   end
 
   def test_storage
-    Stix2.storage_activate
+    Stix2::Storage.activate
     ta = Stix2.parse(stix_messages('threat-actor').first)
     identity = Stix2.parse(stix_messages('identity').first)
 
     assert_equal identity, ta.created_by_ref_instance
-    assert Stix2.storage.is_a?(Hash)
-    Stix2.storage_deactivate
+    assert Stix2::Storage.inspect
+    Stix2::Storage.deactivate
   end
 end

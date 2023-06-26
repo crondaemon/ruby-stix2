@@ -28,11 +28,11 @@ class IndicatorTest < Minitest::Test
       valid_until: Time.now,
       kill_chain_phases: [
         {
-          :kill_chain_name => "lockheed-martin-cyber-kill-chain",
+          kill_chain_name: "lockheed-martin-cyber-kill-chain",
           phase_name: "reconnaissance"
         },
         {
-          :kill_chain_name => "foo",
+          kill_chain_name: "foo",
           phase_name: "pre-attack"
         }
       ]

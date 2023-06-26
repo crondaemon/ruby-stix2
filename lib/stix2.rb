@@ -3,11 +3,13 @@ require 'json'
 require 'time'
 
 require 'stix2/version'
+require 'stix2/ov'
+require 'stix2/enum'
+require 'stix2/base'
+require 'stix2/languages'
 require 'stix2/external_reference'
 require 'stix2/identifier'
 require 'stix2/kill_chain_phase'
-require 'stix2/ov'
-require 'stix2/enum'
 
 require 'stix2/meta_objects/data_markings/granular_marking'
 require 'stix2/meta_objects/data_markings/object_marking'
@@ -51,12 +53,12 @@ require 'stix2/cyberobservable_objects/ipv6_addr'
 require 'stix2/cyberobservable_objects/mac_addr'
 require 'stix2/cyberobservable_objects/mutex'
 require 'stix2/cyberobservable_objects/network_traffic'
+require 'stix2/cyberobservable_objects/process'
 require 'stix2/cyberobservable_objects/software'
 require 'stix2/cyberobservable_objects/url'
 require 'stix2/cyberobservable_objects/user_account'
 require 'stix2/cyberobservable_objects/windows_registry_value'
 require 'stix2/cyberobservable_objects/windows_registry_key'
-require 'stix2/cyberobservable_objects/x509_v3_extension_type'
 require 'stix2/cyberobservable_objects/x509_certificate'
 
 require 'stix2/meta_objects/base'
@@ -64,6 +66,20 @@ require 'stix2/meta_objects/language_content'
 
 require 'stix2/meta_objects/data_markings/base'
 require 'stix2/meta_objects/data_markings/marking_definition'
+
+require 'stix2/extension_definition'
+require 'stix2/extensions/archive_file'
+require 'stix2/extensions/socket'
+require 'stix2/extensions/icmp'
+require 'stix2/extensions/http_request'
+require 'stix2/extensions/ntfs'
+require 'stix2/extensions/tcp'
+require 'stix2/extensions/windows_process'
+require 'stix2/extensions/windows_service'
+require 'stix2/extensions/unix_account'
+require 'stix2/extensions/pdf'
+require 'stix2/extensions/raster_image'
+require 'stix2/extensions/windows_pebinary'
 
 require 'stix2/bundle'
 
@@ -98,9 +114,10 @@ module Stix2
   end
 
   def self.to_bool(value)
-    return true if value == true
-    return true if value == 'true'
-    false
+    (value == true) || (value == 'true')
+  end
+
+  def self.is_hex?(value)
+    value.match?(/^\h*$/)
   end
 end
-

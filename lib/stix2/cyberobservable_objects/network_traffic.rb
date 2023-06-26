@@ -3,7 +3,7 @@ module Stix2
     class NetworkTraffic < Base
       property :start, coerce: Time
       property :end, coerce: Time
-      property :is_active, coerce: ->(v){ boolean(v) }
+      property :is_active, coerce: ->(v){ Stix2.to_bool(v) }
       property :src_ref, coerce: Identifier
       property :dst_ref, coerce: Identifier
       property :src_port, coerce: Integer

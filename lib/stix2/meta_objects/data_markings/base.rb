@@ -1,10 +1,7 @@
 module Stix2
   module MetaObject
     module DataMarking
-      class Base < Hashie::Dash
-        include Hashie::Extensions::Dash::PredefinedValues
-        include Hashie::Extensions::IndifferentAccess
-        include Hashie::Extensions::Dash::Coercion
+      class Base < Stix2::Base
       end
     end
   end
