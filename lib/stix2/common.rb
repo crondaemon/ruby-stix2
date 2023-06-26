@@ -10,7 +10,7 @@ module Stix2
     property :modified, coerce: Time
     property :revoked, coerce: ->(value){ Stix2.to_bool(value) }
     property :labels, coerce: Array[String]
-    property :confidence, coerce: Integer
+    property :confidence, coerce: ->(value){ int = Integer(value) ; [0..100].include?(int) ; int }
     property :lang, coerce: String
     property :external_references, coerce: Array[ExternalReference]
     property :object_marking_refs, coerce: Array[Stix2::MetaObject::DataMarking::ObjectMarking]
@@ -46,6 +46,10 @@ module Stix2
       obj = send(ref_method)
       raise("Can't get a Stix2::Identifier from #{ref_method}") if !obj.is_a?(Stix2::Identifier)
       Stix2::Storage.find(obj)
+    end
+
+    def confidence_scale
+      Stix2::ConfidenceScale.new(confidence)
     end
 
     private

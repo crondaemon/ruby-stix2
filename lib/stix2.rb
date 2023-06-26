@@ -83,6 +83,7 @@ require 'stix2/extensions/windows_pebinary'
 
 require 'stix2/custom_object'
 require 'stix2/bundle'
+require 'stix2/confidence_scale'
 
 require 'stix2/storage'
 
