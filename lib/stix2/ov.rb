@@ -316,4 +316,10 @@ module Stix2
     'windows-local',
     'windows-domain'
   ].freeze
+
+  WINDOWS_PEBINARY_TYPE_OV = [
+    'dll',
+    'exe',
+    'sys'
+  ].freeze
 end

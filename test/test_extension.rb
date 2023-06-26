@@ -2,6 +2,7 @@ require 'test_helper'
 
 class ExtensionTest < Stix2::Test
   def test_top_level
+    Stix2::Storage.activate
     extension_definition = Stix2::ExtensionDefinition.new(
       "id": "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1",
       "type": "extension-definition",
@@ -13,7 +14,7 @@ class ExtensionTest < Stix2::Test
       "created_by_ref": "identity--11b76a96-5d2b-45e0-8a5a-f6994f370731",
       "schema": "https://www.example.com/schema-foo-1a/v1/",
       "version": "1.2.1",
-      "extension_types": [ "toplevel-property-extension" ],
+      "extension_types": ["toplevel-property-extension"],
       "extension_properties": [
         "toxicity", # This is a new property
         "rank" # This is a new property
@@ -43,5 +44,22 @@ class ExtensionTest < Stix2::Test
         }
       }
     )
+    Stix2::Storage.deactivate
+  end
+
+  def test_invalid_name
+    assert_raises(RuntimeError, 'Invalid extension name format') do
+      Stix2::DomainObject::Indicator.new(
+        "type": "indicator",
+        "extensions": { "x-EXAMPLE-com-foo": { "bar_val": "bar" } }
+      )
+    end
+  end
+
+  def test_file_extensions
+    Dir['test/fixtures/extension*.json'].each do |filename|
+      json = JSON.parse(File.read(filename))
+      assert Stix2.parse(json)
+    end
   end
 end

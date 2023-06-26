@@ -14,6 +14,10 @@ module Stix2
       @@storage = nil
     end
 
+    def self.active?
+      !@@storage.nil?
+    end
+
     def self.find(id)
       @@storage[id.to_s]
     end

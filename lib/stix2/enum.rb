@@ -37,4 +37,55 @@ module Stix2
     'property-extension',
     'toplevel-property-extension'
   ].freeze
+
+  NETWORK_SOCKET_ADDRESS_FAMILY_ENUM = [
+    'AF_UNSPEC',
+    'AF_INET',
+    'AF_IPX',
+    'AF_APPLETALK',
+    'AF_NETBIOS',
+    'AF_INET6',
+    'AF_IRDA',
+    'AF_BTH'
+  ].freeze
+
+  NETWORK_SOCKET_TYPE_ENUM = [
+    'SOCK_STREAM',
+    'AF_ISOCK_DGRAMNET',
+    'SOCK_RAW',
+    'SOCK_RDM',
+    'SOCK_SEQPACKET'
+  ].freeze
+
+  WINDOWS_INTEGRITY_LEVEL_ENUM = [
+    'low',
+    'medium',
+    'high',
+    'system'
+  ].freeze
+
+  WINDOWS_SERVICE_START_TYPE_ENUM = [
+    'SERVICE_AUTO_START',
+    'SERVICE_BOOT_START',
+    'SERVICE_DEMAND_START',
+    'SERVICE_DISABLED',
+    'SERVICE_SYSTEM_ALERT'
+  ].freeze
+
+  WINDOWS_SERVICE_TYPE_ENUM = [
+    'SERVICE_KERNEL_DRIVER',
+    'SERVICE_FILE_SYSTEM_DRIVER',
+    'SERVICE_WIN32_OWN_PROCESS',
+    'SERVICE_WIN32_SHARE_PROCESS'
+  ].freeze
+
+  WINDOWS_SERVICE_STATUS_ENUM = [
+    'SERVICE_CONTINUE_PENDING',
+    'SERVICE_PAUSE_PENDING',
+    'SERVICE_PAUSED',
+    'SERVICE_RUNNING',
+    'SERVICE_START_PENDING',
+    'SERVICE_STOP_PENDING',
+    'SERVICE_STOPPED'
+  ].freeze
 end

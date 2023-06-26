@@ -1,0 +1,17 @@
+{
+  "type": "process",
+  "spec_version": "2.1",
+  "id": "process--99ab297d-4c39-48ea-9d64-052d596864df",
+  "pid": 2217,
+  "command_line": "C:\\Windows\\System32\\sirvizio.exe /s",
+  "image_ref": "file--3916128d-69af-5525-be7a-99fac2383a59",
+  "extensions": {
+    "windows-service-ext": {
+      "service_name": "sirvizio",
+      "display_name": "Sirvizio",
+      "start_type": "SERVICE_AUTO_START",
+      "service_type": "SERVICE_WIN32_OWN_PROCESS",
+      "service_status": "SERVICE_RUNNING"
+    }
+  }
+}
