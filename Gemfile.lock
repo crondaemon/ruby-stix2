@@ -3,6 +3,7 @@ PATH
   specs:
     ruby-stix2 (0.1.1)
       hashie (~> 5.0.0)
+      uuidtools
 
 GEM
   remote: https://rubygems.org/
@@ -31,6 +32,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    uuidtools (2.2.0)
 
 PLATFORMS
   x86_64-linux
