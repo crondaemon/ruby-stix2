@@ -30,7 +30,7 @@ module Stix2
     'system',
     'organization',
     'class',
-    'unspecified'
+    'unknown'
   ].freeze
 
   INDUSTRY_SECTOR_OV = [
