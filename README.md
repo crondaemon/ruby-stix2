@@ -146,7 +146,7 @@ scales. To make this conversion smooth, an object offers the method `confidence_
 indicator = Stix2::DomainObject::Indicator.new(confidence: i)
 indicator.confidence # This is the raw integer
 indicator.confidence_scale.to_admiralty_credibility # this is a string in this scale
-indicator.confidence_scale.to_admiralty_credibility_strix # this is a string in stix mode
+indicator.confidence_scale.to_admiralty_credibility_stix # this is a string in stix mode
 ```
 
 # Contribution
