@@ -1,5 +1,8 @@
+require 'uuidtools'
+
 module Stix2
   SPEC_VERSIONS = ['2.1']
+  UUID_NAMESPACE = '00abedb4-aa42-466c-9c01-fed23315a9b7'
 
   class Common < Stix2::Base
     property :type, required: true, coerce: String
@@ -32,6 +35,10 @@ module Stix2
       super(options)
       process_extensions(options)
       Stix2::Storage.add(self)
+      if !id
+        uuid = UUIDTools::UUID.sha1_create(UUIDTools::UUID.parse(UUID_NAMESPACE), '')
+        self.id = "#{type}--#{uuid}"
+      end
     end
 
     def method_missing(m, *args, &block)

@@ -65,4 +65,9 @@ class Stix2Test < Stix2::Test
     error_hash = eval(message)
     assert ["Too short", "Invalid name", "Too long"], error_hash.keys
   end
+
+  def test_auto_uuid
+    indicator = Stix2::DomainObject::Indicator.new
+    assert indicator.id
+  end
 end
