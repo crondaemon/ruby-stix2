@@ -35,10 +35,7 @@ module Stix2
       super(options)
       process_extensions(options)
       Stix2::Storage.add(self)
-      if !id
-        uuid = UUIDTools::UUID.sha1_create(UUIDTools::UUID.parse(UUID_NAMESPACE), '')
-        self.id = "#{type}--#{uuid}"
-      end
+      self.id = "#{type}--#{SecureRandom.uuid}" if !id
     end
 
     def method_missing(m, *args, &block)
