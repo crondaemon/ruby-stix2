@@ -6,7 +6,7 @@ module Stix2
 
   class Common < Stix2::Base
     property :type, required: true, coerce: String
-    property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS
+    property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS, default: SPEC_VERSIONS.last
     property :id, coerce: Identifier
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
