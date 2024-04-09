@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Stix2Test < Stix2::Test
   class Fake
@@ -8,23 +8,23 @@ class Stix2Test < Stix2::Test
   end
 
   def test_objects
-    [:'attack-pattern', :campaign, :'course-of-action', :grouping, :identity, :indicator, :infrastructure,
-      :'intrusion-set', :location, :malware, :'malware_analysis', :note, :'observed-data', :opinion, :report,
-      :'threat-actor', :tool, :vulnerability, :relationship, :sighting, :artifact, :autonomous_system, :directory,
+    [:"attack-pattern", :campaign, :"course-of-action", :grouping, :identity, :indicator, :infrastructure,
+      :"intrusion-set", :location, :malware, :malware_analysis, :note, :"observed-data", :opinion, :report,
+      :"threat-actor", :tool, :vulnerability, :relationship, :sighting, :artifact, :autonomous_system, :directory,
       :domain_name, :email_addr, :email_message, :email_mime_part_type, :file, :ipv4_addr, :ipv6_addr, :mac_addr,
       :mutex, :network_traffic, :software, :url, :user_account, :windows_registry_key, :x509_certificate,
       :language_content, :marking_definition].each do |name|
       stix_messages(name).each do |message|
         assert Stix2.parse(message)
       end
-      assert_raises{ Stix2::DomainObject::Indicator.new(type: 'pippo') }
+      assert_raises { Stix2::DomainObject::Indicator.new(type: "pippo") }
     end
   end
 
   def test_object_marking
     obj = Stix2::MetaObject::DataMarking::ObjectMarking.new(stix_messages(:object_marking))
     assert obj
-    assert 'marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da', obj.to_s
+    assert "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da", obj.to_s
   end
 
   def test_marking_definition
@@ -35,19 +35,19 @@ class Stix2Test < Stix2::Test
   end
 
   def test_init
-    assert Stix2.parse('type' => 'indicator')
+    assert Stix2.parse("type" => "indicator")
     assert Stix2.parse('{"type":"indicator"}')
     assert Stix2.parse(Fake.new)
   end
 
   def test_unsupported
-    assert_raises{ Stix2.parse(type: 'unsupported') }
+    assert_raises { Stix2.parse(type: "unsupported") }
   end
 
   def test_storage
     Stix2::Storage.activate
-    ta = Stix2.parse(stix_messages('threat-actor').first)
-    identity = Stix2.parse(stix_messages('identity').first)
+    ta = Stix2.parse(stix_messages("threat-actor").first)
+    identity = Stix2.parse(stix_messages("identity").first)
 
     assert_equal identity, ta.created_by_ref_instance
     assert Stix2::Storage.inspect
@@ -55,15 +55,16 @@ class Stix2Test < Stix2::Test
   end
 
   def test_custom_object
-    assert Stix2::CustomObject.new(stix_messages('custom_object'))
-    assert Stix2.parse(stix_messages('custom_object'))
-    assert_raises{ Stix2::CustomObject.new(type: 'pippo') }
-    errors = assert_raises(RuntimeError){
-      Stix2::CustomObject.new(type: 'x-type', p1: 'p1', PR2: 'PR2', ('pr3' * 200) => 'pr3')
+    assert Stix2::CustomObject.new(stix_messages("custom_object"))
+    assert Stix2.parse(stix_messages("custom_object"))
+    assert_raises { Stix2::CustomObject.new(type: "pippo") }
+    errors = assert_raises(RuntimeError) {
+      Stix2::CustomObject.new(:type => "x-type", :p1 => "p1", :PR2 => "PR2", ("pr3" * 200) => "pr3")
     }
     message = errors.message.match("{(.*)}")[0]
-    error_hash = eval(message)
-    assert ["Too short", "Invalid name", "Too long"], error_hash.keys
+    assert_includes message, "\"Too short\"=>[:p1]"
+    assert_includes message, "\"Invalid name\"=>[:PR2]"
+    assert_includes message, "\"Too long\"=>[:#{"pr3" * 200}]"
   end
 
   def test_auto_uuid

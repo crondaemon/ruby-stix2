@@ -4,7 +4,7 @@ module Stix2
       class GranularMarking < Stix2::Base
         property :lang, coerce: String
         property :marking_ref, coerce: Identifier
-        property :selectors, coerce: Array[String]
+        property :selectors, coerce: [String]
       end
     end
   end

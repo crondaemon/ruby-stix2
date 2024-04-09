@@ -1,8 +1,8 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
 
-require 'minitest/autorun'
-require 'stix2'
+require "minitest/autorun"
+require "stix2"
 
 module Stix2
   class Test < Minitest::Test
