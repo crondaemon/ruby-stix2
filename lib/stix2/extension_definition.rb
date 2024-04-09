@@ -4,7 +4,7 @@ module Stix2
     property :description, coerce: String
     property :schema, required: true, coerce: String
     property :version, required: true, coerce: String
-    property :extension_types, required: true, coerce: ->(values){ validate_array(values, EXTENSION_TYPE_ENUM) }
-    property :extension_properties, coerce: Array[String]
+    property :extension_types, required: true, coerce: ->(values) { validate_array(values, EXTENSION_TYPE_ENUM) }
+    property :extension_properties, coerce: [String]
   end
 end

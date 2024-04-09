@@ -1,7 +1,7 @@
 module Stix2
   module Extensions
     class WindowsPeOptionalHeaderType < Stix2::Base
-      property :magic_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
+      property :magic_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
       property :major_linker_version, coerce: Integer
       property :minor_linker_version, coerce: Integer
       property :size_of_code, coerce: Integer
@@ -19,19 +19,19 @@ module Stix2
       property :minor_image_version, coerce: Integer
       property :major_subsystem_version, coerce: Integer
       property :minor_subsystem_version, coerce: Integer
-      property :win32_version_value_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
+      property :win32_version_value_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
       property :size_of_image, coerce: Integer
       property :size_of_headers, coerce: Integer
-      property :checksum_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
-      property :subsystem_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
-      property :dll_characteristics_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
+      property :checksum_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
+      property :subsystem_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
+      property :dll_characteristics_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
       property :size_of_stack_reserve, coerce: Integer
       property :size_of_stack_commit, coerce: Integer
       property :size_of_heap_reserve, coerce: Integer
       property :size_of_heap_commit, coerce: Integer
-      property :loader_flags_hex, coerce: ->(value){ Stix2.is_hex?(value) && value }
+      property :loader_flags_hex, coerce: ->(value) { Stix2.is_hex?(value) && value }
       property :number_of_rva_and_sizes, coerce: Integer
-      property :hashes, coerce: ->(hsh){ hash_dict(hsh) }
+      property :hashes, coerce: ->(hsh) { hash_dict(hsh) }
     end
   end
 end

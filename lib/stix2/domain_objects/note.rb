@@ -3,8 +3,8 @@ module Stix2
     class Note < Base
       property :abstract, coerce: String
       property :content, coerce: String
-      property :authors, coerce: Array[String]
-      property :object_refs, coerce: Array[Identifier]
+      property :authors, coerce: [String]
+      property :object_refs, coerce: [Identifier]
     end
   end
 end

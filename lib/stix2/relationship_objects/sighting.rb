@@ -6,9 +6,9 @@ module Stix2
       property :last_seen, required: true, coerce: Time
       property :count, coerce: Integer
       property :sighting_of_ref, required: true, coerce: String
-      property :observed_data_refs, coerce: Array[String]
-      property :where_sighted_refs, coerce: Array[String]
-      property :summary, coerce: ->(v){ Stix2.to_bool(v) }
+      property :observed_data_refs, coerce: [String]
+      property :where_sighted_refs, coerce: [String]
+      property :summary, coerce: ->(v) { Stix2.to_bool(v) }
     end
   end
 end

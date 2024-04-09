@@ -1,8 +1,8 @@
-require 'uuidtools'
+require "uuidtools"
 
 module Stix2
-  SPEC_VERSIONS = ['2.1']
-  UUID_NAMESPACE = '00abedb4-aa42-466c-9c01-fed23315a9b7'
+  SPEC_VERSIONS = ["2.1"]
+  UUID_NAMESPACE = "00abedb4-aa42-466c-9c01-fed23315a9b7"
 
   class Common < Stix2::Base
     include Hashie::Extensions::Dash::PropertyTranslation
@@ -12,21 +12,25 @@ module Stix2
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
     property :modified, coerce: Time
-    property :revoked, coerce: ->(value){ Stix2.to_bool(value) }
-    property :labels, coerce: Array[String]
-    property :confidence, coerce: ->(value){ int = Integer(value) ; [0..100].include?(int) ; int }
+    property :revoked, coerce: ->(value) { Stix2.to_bool(value) }
+    property :labels, coerce: [String]
+    property :confidence, coerce: ->(value) {
+                                    int = Integer(value)
+                                    [0..100].include?(int)
+                                    int
+                                  }
     property :lang, coerce: String
-    property :external_references, coerce: Array[ExternalReference]
-    property :object_marking_refs, coerce: Array[Stix2::MetaObject::DataMarking::ObjectMarking]
-    property :granular_markings, coerce: Array[MetaObject::DataMarking::GranularMarking]
-    property :defanged, coerce: ->(value){ Stix2.to_bool(value) }
+    property :external_references, coerce: [ExternalReference]
+    property :object_marking_refs, coerce: [Stix2::MetaObject::DataMarking::ObjectMarking]
+    property :granular_markings, coerce: [MetaObject::DataMarking::GranularMarking]
+    property :defanged, coerce: ->(value) { Stix2.to_bool(value) }
     property :extensions, coerce: Hash
 
     def initialize(options = {})
       Hashie.symbolize_keys!(options)
-      type = to_dash(self.class.name.split('::').last)
+      type = to_dash(self.class.name.split("::").last)
       if options[:type]
-        if !options[:type].start_with?('x-') && options[:type] != type
+        if !options[:type].start_with?("x-") && options[:type] != type
           raise("Property 'type' must be '#{type}'")
         end
       else
@@ -39,14 +43,14 @@ module Stix2
     end
 
     def method_missing(m, *args, &block)
-      if !m.to_s.end_with?('_instance')
+      if !m.to_s.end_with?("_instance")
         # :nocov:
         super(m, args, block)
         return
         # :nocov:
       end
       # Retrieve the original method
-      ref_method = m.to_s.gsub(/_instance$/, '')
+      ref_method = m.to_s.gsub(/_instance$/, "")
       obj = send(ref_method)
       raise("Can't get a Stix2::Identifier from #{ref_method}") if !obj.is_a?(Stix2::Identifier)
       Stix2::Storage.find(obj)
@@ -74,13 +78,13 @@ module Stix2
     end
 
     def process_toplevel_property_extension(extensions)
-      extension_definition = extensions&.find{ |key, val| key.to_s.start_with?('extension-definition') }
+      extension_definition = extensions&.find { |key, val| key.to_s.start_with?("extension-definition") }
       return if !extension_definition
 
       id = extension_definition.first
       type = extension_definition.last[:extension_type]
-      if type == 'toplevel-property-extension'
-        Stix2::Storage.active? || raise('Stix.storage must be active to use toplevel-property-extension')
+      if type == "toplevel-property-extension"
+        Stix2::Storage.active? || raise("Stix.storage must be active to use toplevel-property-extension")
         ext = Stix2::Storage.find(id)
         ext.extension_properties.each do |prop|
           self.class.class_eval do
@@ -94,32 +98,32 @@ module Stix2
       options[:extensions]&.each do |id, value|
         case id.to_s
         when /[A-Z]/
-          raise('Invalid extension name format.')
-        when 'archive-ext'
+          raise("Invalid extension name format.")
+        when "archive-ext"
           extensions[id] = Stix2::Extensions::ArchiveFile.new(value)
         when /^extension-definition/
           # Ignore it, already processes
-        when 'socket-ext'
+        when "socket-ext"
           extensions[id] = Stix2::Extensions::Socket.new(value)
-        when 'icmp-ext'
+        when "icmp-ext"
           extensions[id] = Stix2::Extensions::Icmp.new(value)
-        when 'http-request-ext'
+        when "http-request-ext"
           extensions[id] = Stix2::Extensions::HttpRequest.new(value)
-        when 'ntfs-ext'
+        when "ntfs-ext"
           extensions[id] = Stix2::Extensions::Ntfs.new(value)
-        when 'tcp-ext'
+        when "tcp-ext"
           extensions[id] = Stix2::Extensions::Tcp.new(value)
-        when 'windows-process-ext'
+        when "windows-process-ext"
           extensions[id] = Stix2::Extensions::WindowsProcess.new(value)
-        when 'windows-service-ext'
+        when "windows-service-ext"
           extensions[id] = Stix2::Extensions::WindowsService.new(value)
-        when 'unix-account-ext'
+        when "unix-account-ext"
           extensions[id] = Stix2::Extensions::UnixAccount.new(value)
-        when 'pdf-ext'
+        when "pdf-ext"
           extensions[id] = Stix2::Extensions::Pdf.new(value)
-        when 'raster-image-ext'
+        when "raster-image-ext"
           extensions[id] = Stix2::Extensions::RasterImage.new(value)
-        when 'windows-pebinary-ext'
+        when "windows-pebinary-ext"
           extensions[id] = Stix2::Extensions::WindowsPebinary.new(value)
         else
           # Ensure we have a hash

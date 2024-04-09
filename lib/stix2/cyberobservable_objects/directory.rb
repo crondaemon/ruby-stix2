@@ -6,7 +6,7 @@ module Stix2
       property :ctime, coerce: Time
       property :mtime, coerce: Time
       property :atime, coerce: Time
-      property :contains_refs, coerce: Array[Identifier]
+      property :contains_refs, coerce: [Identifier]
     end
   end
 end

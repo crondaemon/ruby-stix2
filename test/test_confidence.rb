@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ConfidenceTest < Stix2::Test
   def test_confidence

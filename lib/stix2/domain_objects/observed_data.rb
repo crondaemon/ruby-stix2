@@ -5,7 +5,7 @@ module Stix2
       property :last_observed, required: true, coerce: Time
       property :number_observed, required: true, coerce: Integer
       property :objects, coerce: Hash
-      property :object_refs, coerce: Array[Identifier]
+      property :object_refs, coerce: [Identifier]
     end
   end
 end
