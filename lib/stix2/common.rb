@@ -5,9 +5,10 @@ module Stix2
   UUID_NAMESPACE = '00abedb4-aa42-466c-9c01-fed23315a9b7'
 
   class Common < Stix2::Base
+    include Hashie::Extensions::Dash::PropertyTranslation
     property :type, required: true, coerce: String
     property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS, default: SPEC_VERSIONS.last
-    property :id, coerce: Identifier
+    property :id, coerce: Identifier, required: true, from: :type, with: ->(type) { "#{type}--#{SecureRandom.uuid}" }
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
     property :modified, coerce: Time
@@ -35,7 +36,6 @@ module Stix2
       super(options)
       process_extensions(options)
       Stix2::Storage.add(self)
-      self.id = "#{type}--#{SecureRandom.uuid}" if !id
     end
 
     def method_missing(m, *args, &block)
