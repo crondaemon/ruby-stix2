@@ -1,4 +1,4 @@
-require "uuidtools"
+require "securerandom"
 
 module Stix2
   SPEC_VERSIONS = ["2.1"]
