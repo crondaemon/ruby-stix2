@@ -71,11 +71,13 @@ module Stix2
       excess.empty? || raise("Invalid values: #{excess}")
       list
     end
+    private_class_method :validate_array
 
     def self.hash_dict(hsh)
       validate_array(hsh.keys, HASH_ALGORITHM_OV)
       hsh
     end
+    private_class_method :hash_dict
 
     def process_toplevel_property_extension(extensions)
       extension_definition = extensions&.find { |key, val| key.to_s.start_with?("extension-definition") }
