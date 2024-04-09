@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "~> 0.22.0"
   spec.add_development_dependency "irb", "~> 1.7.0"
   spec.add_development_dependency "mutex_m"
+  spec.add_development_dependency "standardrb"
 end

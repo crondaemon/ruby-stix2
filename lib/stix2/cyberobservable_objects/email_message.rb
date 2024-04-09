@@ -12,7 +12,7 @@ module Stix2
       property :message_id, coerce: String
       property :subject, coerce: String
       property :received_lines, coerce: [String]
-      property :additional_header_fields, coerce: Hash[String => String]
+      property :additional_header_fields, coerce: {String => String}
       property :body, coerce: String
       property :body_multipart, coerce: [EmailMimePartType]
       property :raw_email_ref, coerce: Identifier

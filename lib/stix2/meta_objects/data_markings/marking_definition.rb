@@ -4,7 +4,7 @@ module Stix2
       class MarkingDefinition < Stix2::Common
         property :name, coerce: String
         property :definition_type, required: true, coerce: String
-        property :definition, required: true, coerce: Hash[String => String]
+        property :definition, required: true, coerce: {String => String}
 
         def initialize(args)
           super(args)
