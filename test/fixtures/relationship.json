@@ -1,1 +1,36 @@
-[{"type":"relationship","id":"relationship--f0f0ef71-d03c-42ec-9796-dac26ffa1832","created":"2023-06-17T21:15:14.723Z","modified":"2023-06-17T21:15:14.723Z","relationship_type":"indicates","source_ref":"indicator--62b1a982-8b49-4899-bd4d-a7d8bd0870c5","target_ref":"malware--0a8e5a42-5f9c-4661-88c6-1b3ac83b41be"}]
+[
+  {
+    "type":"relationship",
+    "id":"relationship--f0f0ef71-d03c-42ec-9796-dac26ffa1832",
+    "created":"2023-06-17T21:15:14.723Z",
+    "modified":"2023-06-17T21:15:14.723Z",
+    "relationship_type":"indicates",
+    "source_ref":"indicator--62b1a982-8b49-4899-bd4d-a7d8bd0870c5",
+    "target_ref":"malware--0a8e5a42-5f9c-4661-88c6-1b3ac83b41be"
+  },
+  {
+    "type":"relationship",
+    "id":"relationship--f0f0ef71-d03c-42ec-9796-dac26ffa1832",
+    "created":"2023-06-17T21:15:14.723Z",
+    "modified":"2023-06-17T21:15:14.723Z",
+    "source_ref":"indicator--62b1a982-8b49-4899-bd4d-a7d8bd0870c5",
+    "target_ref":"malware--0a8e5a42-5f9c-4661-88c6-1b3ac83b41be"
+  },
+  {
+    "type":"relationship",
+    "relationship_type": "foo",
+    "id":"relationship--f0f0ef71-d03c-42ec-9796-dac26ffa1832",
+    "created":"2023-06-17T21:15:14.723Z",
+    "modified":"2023-06-17T21:15:14.723Z",
+    "source_ref":"indicator--62b1a982-8b49-4899-bd4d-a7d8bd0870c5",
+    "target_ref":"malware--0a8e5a42-5f9c-4661-88c6-1b3ac83b41be"
+  },
+  {
+    "type":"relationship",
+    "id":"relationship--f0f0ef71-d03c-42ec-9796-dac26ffa1832",
+    "created":"2023-06-17T21:15:14.723Z",
+    "modified":"2023-06-17T21:15:14.723Z",
+    "source_ref":"attack-pattern--62b1a982-8b49-4899-bd4d-a7d8bd0870c5",
+    "target_ref":"identity--0a8e5a42-5f9c-4661-88c6-1b3ac83b41be"
+  }
+]
