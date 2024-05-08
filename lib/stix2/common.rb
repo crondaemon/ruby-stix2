@@ -8,7 +8,7 @@ module Stix2
     include Hashie::Extensions::Dash::PropertyTranslation
     property :type, required: true, coerce: String
     property :spec_version, coerce: String, values: Stix2::SPEC_VERSIONS, default: SPEC_VERSIONS.last
-    property :id, coerce: Identifier, required: true, from: :type, with: ->(type) { "#{type}--#{SecureRandom.uuid}" }
+    property :id, coerce: Identifier, required: true
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
     property :modified, coerce: Time
@@ -36,6 +36,9 @@ module Stix2
       else
         options[:type] = type
       end
+
+      options[:id] ||= "#{type}--#{SecureRandom.uuid}"
+
       process_toplevel_property_extension(options[:extensions])
       super(options)
       process_extensions(options)
