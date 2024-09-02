@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.18.1"
   spec.add_development_dependency "simplecov", "~> 0.22.0"
   spec.add_development_dependency "irb", "~> 1.7.0"
-  spec.add_development_dependency "mutex_m"
-  spec.add_development_dependency "standardrb"
+  spec.add_development_dependency "mutex_m", "~> 0.2.0"
+  spec.add_development_dependency "standardrb", "~> 1.0.1"
 end
