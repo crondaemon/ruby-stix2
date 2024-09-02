@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ["lib"]
   spec.files = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.homepage = "https://rubygemspec.org/gems/stix2"
+  spec.homepage = "https://github.com/crondaemon/ruby-stix2"
   spec.license = "GPL-2.0-or-later"
 
   spec.required_ruby_version = ">= 2.7"
