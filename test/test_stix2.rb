@@ -62,9 +62,9 @@ class Stix2Test < Stix2::Test
       Stix2::CustomObject.new(:type => "x-type", :p1 => "p1", :PR2 => "PR2", ("pr3" * 200) => "pr3")
     }
     message = errors.message.match("{(.*)}")[0]
-    assert_includes message, "\"Too short\"=>[:p1]"
-    assert_includes message, "\"Invalid name\"=>[:PR2]"
-    assert_includes message, "\"Too long\"=>[:#{"pr3" * 200}]"
+    assert_match(/"Too short"\s*=>\s*\[:p1\]/, message)
+    assert_match(/"Invalid name"\s*=>\s*\[:PR2\]/, message)
+    assert_match(/"Too long"\s*=>\s*\[:#{"pr3" * 200}\]/, message)
   end
 
   def test_auto_uuid
