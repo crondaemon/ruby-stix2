@@ -1,6 +1,6 @@
 require "test_helper"
 
-class IndicatorTest < Minitest::Test
+class IndicatorTest < Stix2::Test
   def test_default_value
     indicator = Stix2::DomainObject::Indicator.new
     assert indicator
@@ -41,7 +41,10 @@ class IndicatorTest < Minitest::Test
     assert indicator.indicator_types.count > 0
   end
 
-  def test_bad_build
-    assert_raises { Stix2::DomainObject::Indicator.new(indicator_types: ["test"]) }
+  def test_invalid_values
+    exception = assert_raises(Stix2::Exception::InvalidValues) do
+      Stix2::DomainObject::Indicator.new(indicator_types: ["invalid1", "invalid2"])
+    end
+    assert_equal "Invalid values: invalid1, invalid2", exception.message
   end
 end

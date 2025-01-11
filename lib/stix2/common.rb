@@ -31,7 +31,7 @@ module Stix2
       type = to_dash(self.class.name.split("::").last)
       if options[:type]
         if !options[:type].start_with?("x-") && options[:type] != type
-          raise("Property 'type' must be '#{type}'")
+          raise(Exception::BadType.new(type))
         end
       else
         options[:type] = type
@@ -55,7 +55,6 @@ module Stix2
       # Retrieve the original method
       ref_method = m.to_s.gsub(/_instance$/, "")
       obj = send(ref_method)
-      raise("Can't get a Stix2::Identifier from #{ref_method}") if !obj.is_a?(Stix2::Identifier)
       Stix2::Storage.find(obj)
     end
 
@@ -75,7 +74,7 @@ module Stix2
 
     def self.validate_array(list, valid_values)
       excess = (Array(list).map(&:to_s) - valid_values.map(&:to_s))
-      excess.empty? || raise("Invalid values: #{excess}")
+      raise(Exception::InvalidValues.new(excess)) if !excess.empty?
       list
     end
     private_class_method :validate_array
@@ -93,7 +92,7 @@ module Stix2
       id = extension_definition.first
       type = extension_definition.last[:extension_type]
       if type == "toplevel-property-extension"
-        Stix2::Storage.active? || raise("Stix.storage must be active to use toplevel-property-extension")
+        Stix2::Storage.active? || raise(Exception::StorageInactive.new)
         ext = Stix2::Storage.find(id)
         ext.extension_properties.each do |prop|
           self.class.class_eval do
@@ -107,7 +106,7 @@ module Stix2
       options[:extensions]&.each do |id, value|
         case id.to_s
         when /[A-Z]/
-          raise("Invalid extension name format.")
+          raise(Exception::InvalidExtensionNameFormat.new(id))
         when "archive-ext"
           extensions[id] = Stix2::Extensions::ArchiveFile.new(value)
         when /^extension-definition/
@@ -136,7 +135,7 @@ module Stix2
           extensions[id] = Stix2::Extensions::WindowsPebinary.new(value)
         else
           # Ensure we have a hash
-          value.is_a?(Hash) || raise("Custom extension must be Hash: #{value}")
+          value.is_a?(Hash) || raise(Exception::CustomExtensionFormat.new(value))
         end
       end
     end

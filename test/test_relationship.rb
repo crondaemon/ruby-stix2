@@ -13,9 +13,8 @@ class RelationshipTest < Stix2::Test
 
   def test_not_create_relationships
     stix_messages("relationship_error").each do |message|
-      assert_raises(ArgumentError) do
-        Stix2.parse(message)
-      end
+      exception = assert_raises(ArgumentError) { Stix2.parse(message) }
+      assert_match(/The property .* is required for Stix2::.*/, exception.message)
     end
   end
 end

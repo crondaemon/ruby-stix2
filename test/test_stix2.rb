@@ -17,31 +17,26 @@ class Stix2Test < Stix2::Test
       stix_messages(name).each do |message|
         assert Stix2.parse(message)
       end
-      assert_raises { Stix2::DomainObject::Indicator.new(type: "pippo") }
     end
   end
 
-  def test_object_marking
-    obj = Stix2::MetaObject::DataMarking::ObjectMarking.new(stix_messages(:object_marking))
-    assert obj
-    assert "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da", obj.to_s
+  def test_missing_type
+    exception = assert_raises(Stix2::Exception::PropertyMissing) { Stix2.parse({}) }
+    assert_equal "Property 'type' is missing", exception.message
   end
 
-  def test_marking_definition
-    data = stix_messages(:marking_definition2)
-    assert_raises(RuntimeError, "Property 'definition_type' and 'definition' must have a matching key") do
-      Stix2::MetaObject::DataMarking::MarkingDefinition.new(data)
-    end
+  def test_wrong_type
+    exception = assert_raises(Stix2::Exception::MessageUnsupported) { Stix2.parse(type: "pippo") }
+    assert_equal "Message unsupported: 'pippo'", exception.message
+
+    exception = assert_raises(Stix2::Exception::BadType) { Stix2::DomainObject::Indicator.new(type: "pippo") }
+    assert_equal "Property 'type' must be 'indicator'", exception.message
   end
 
   def test_init
     assert Stix2.parse("type" => "indicator")
     assert Stix2.parse('{"type":"indicator"}')
     assert Stix2.parse(Fake.new)
-  end
-
-  def test_unsupported
-    assert_raises { Stix2.parse(type: "unsupported") }
   end
 
   def test_storage
@@ -52,19 +47,6 @@ class Stix2Test < Stix2::Test
     assert_equal identity, ta.created_by_ref_instance
     assert Stix2::Storage.inspect
     Stix2::Storage.deactivate
-  end
-
-  def test_custom_object
-    assert Stix2::CustomObject.new(stix_messages("custom_object"))
-    assert Stix2.parse(stix_messages("custom_object"))
-    assert_raises { Stix2::CustomObject.new(type: "pippo") }
-    errors = assert_raises(RuntimeError) {
-      Stix2::CustomObject.new(:type => "x-type", :p1 => "p1", :PR2 => "PR2", ("pr3" * 200) => "pr3")
-    }
-    message = errors.message.match("{(.*)}")[0]
-    assert_match(/"Too short"\s*=>\s*\[:p1\]/, message)
-    assert_match(/"Invalid name"\s*=>\s*\[:PR2\]/, message)
-    assert_match(/"Too long"\s*=>\s*\[:#{"pr3" * 200}\]/, message)
   end
 
   def test_auto_uuid

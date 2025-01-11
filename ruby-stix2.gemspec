@@ -28,4 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "irb", "~> 1.7.0"
   spec.add_development_dependency "mutex_m", "~> 0.2.0"
   spec.add_development_dependency "standardrb", "~> 1.0.1"
+  spec.add_development_dependency "ostruct", "~> 0.6.1"
+  spec.add_development_dependency "logger", "~> 1.6.5"
 end

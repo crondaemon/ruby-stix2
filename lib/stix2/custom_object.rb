@@ -6,14 +6,14 @@ module Stix2
 
     def initialize(options)
       Hashie.symbolize_keys!(options)
-      raise("A CustomObject must have at least one property") if options[:type] && options.count == 1
+      raise(Exception::CustomObjectPropertyCount.new) if options[:type] && options.count == 1
       errors = Hash.new { |k, v| k[v] = [] }
       options.each do |key, value|
         errors["Too short"] << key if key != :id && key.size < 3
         errors["Invalid name"] << key if !key.match?(/^[a-z0-9_]*$/)
         errors["Too long"] << key if key.size > 250
       end
-      raise("Error creating CustomObject: #{errors}") if !errors.empty?
+      raise(Exception::CustomObjectCreationError.new(errors)) if !errors.empty?
       super(options)
     end
   end

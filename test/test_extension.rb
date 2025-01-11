@@ -48,12 +48,23 @@ class ExtensionTest < Stix2::Test
   end
 
   def test_invalid_name
-    assert_raises(RuntimeError, "Invalid extension name format") do
+    exception = assert_raises(Stix2::Exception::InvalidExtensionNameFormat) do
       Stix2::DomainObject::Indicator.new(
         type: "indicator",
         extensions: {"x-EXAMPLE-com-foo": {bar_val: "bar"}}
       )
     end
+    assert_equal "Invalid extension name format: x-EXAMPLE-com-foo", exception.message
+  end
+
+  def test_invalid_format
+    exception = assert_raises(Stix2::Exception::CustomExtensionFormat) do
+      Stix2::DomainObject::Indicator.new(
+        type: "indicator",
+        extensions: {"x-example-com-foo": "invalid"}
+      )
+    end
+    assert_equal "Custom extension value must be Hash. Got: invalid", exception.message
   end
 
   def test_file_extensions
@@ -61,5 +72,18 @@ class ExtensionTest < Stix2::Test
       json = JSON.parse(File.read(filename))
       assert Stix2.parse(json)
     end
+  end
+
+  def test_inactive_top_level
+    exception = assert_raises(Stix2::Exception::StorageInactive) do
+      Stix2::DomainObject::Indicator.new(
+        extensions: {
+          "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1": {
+            extension_type: "toplevel-property-extension"
+          }
+        }
+      )
+    end
+    assert_equal "Stix2::Storage must be active to use toplevel-property-extension", exception.message
   end
 end
