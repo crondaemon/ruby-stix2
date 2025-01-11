@@ -23,6 +23,7 @@ jobs:
     - run: bundle
     - run: bundle exec rake test
     - run: bundle exec standardrb
+      if: ${{ matrix.ruby != 'head' }}
     - name: SimpleCov Ruby ${{ matrix.ruby }}
       uses: joshmfrankel/simplecov-check-action@main
       if: ${{ matrix.os == 'ubuntu-latest' && matrix.ruby == '3.2' }}

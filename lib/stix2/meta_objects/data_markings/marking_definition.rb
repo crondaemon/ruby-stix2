@@ -8,9 +8,9 @@ module Stix2
 
         def initialize(args)
           super(args)
-          raise("Property 'definition' must contain a single key") if definition.size > 1
+          raise(Exception::PropertyDefinitionSize.new(definition.size)) if definition.size > 1
           if definition_type != definition.keys.first
-            raise("Property 'definition_type' and 'definition' must have a matching key")
+            raise(Exception::PropertyDefinitionMatching.new)
           end
         end
       end

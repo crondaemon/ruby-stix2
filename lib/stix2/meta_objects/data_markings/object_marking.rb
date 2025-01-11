@@ -3,7 +3,7 @@ module Stix2
     module DataMarking
       class ObjectMarking < String
         def initialize(value)
-          value.match(/marking-definition--.*/) || raise("Invalid value: #{value}")
+          value.match(/marking-definition--.*/) || raise(Exception::InvalidValues.new(value))
           super(value)
         end
       end

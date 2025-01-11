@@ -15,6 +15,7 @@ require "stix2/meta_objects/data_markings/granular_marking"
 require "stix2/meta_objects/data_markings/object_marking"
 
 require "stix2/common"
+require "stix2/exception"
 require "stix2/domain_objects/base"
 require "stix2/domain_objects/attack_pattern"
 require "stix2/domain_objects/campaign"
@@ -105,7 +106,7 @@ module Stix2
     end
     Hashie.symbolize_keys!(options_)
     type = options_[:type]
-    raise("Property 'type' is missing") if !type
+    raise Exception::PropertyMissing.new("type") if !type
     # Let's try to guess the domain of the object, among the known ones
     [nil, "DomainObject", "RelationshipObject", "CyberobservableObject", "MetaObject",
       "MetaObject::DataMarking"].each do |family|
@@ -116,7 +117,7 @@ module Stix2
       end
       return Module.const_get(class_name).new(options_) if Module.const_defined?(class_name)
     end
-    raise("Message unsupported: #{type}")
+    raise Exception::MessageUnsupported.new(type)
   end
 
   def self.to_bool(value)
