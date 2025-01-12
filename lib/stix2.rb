@@ -3,6 +3,7 @@ require "json"
 require "time"
 
 require "stix2/version"
+require "stix2/bool"
 require "stix2/ov"
 require "stix2/enum"
 require "stix2/base"
@@ -10,6 +11,10 @@ require "stix2/languages"
 require "stix2/external_reference"
 require "stix2/identifier"
 require "stix2/kill_chain_phase"
+
+require "stix2/validators/array"
+require "stix2/validators/hashes"
+require "stix2/validators/hex"
 
 require "stix2/meta_objects/data_markings/granular_marking"
 require "stix2/meta_objects/data_markings/object_marking"
@@ -118,13 +123,5 @@ module Stix2
       return Module.const_get(class_name).new(options_) if Module.const_defined?(class_name)
     end
     raise Exception::MessageUnsupported.new(type)
-  end
-
-  def self.to_bool(value)
-    (value == true) || (value == "true")
-  end
-
-  def self.is_hex?(value)
-    value.match?(/^\h*$/)
   end
 end

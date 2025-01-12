@@ -3,11 +3,22 @@ module Stix2
     class Infrastructure < Base
       property :name, required: true, coerce: String
       property :description, coerce: String
-      property :infrastructure_types, coerce: ->(v) { validate_array(v, Stix2::INFRASTRUCTURE_TYPE_OV) }
+      property :infrastructure_types, coerce: [String]
       property :aliases, coerce: [String]
       property :kill_chain_phases, coerce: [KillChainPhase]
       property :first_seen, coerce: Time
       property :last_seen, coerce: Time
+
+      def initialize(args = {})
+        super
+        validate_infrastructure_types!
+      end
+
+      private
+
+      def validate_infrastructure_types!
+        Stix2::Validators::Array.new(infrastructure_types, Stix2::INFRASTRUCTURE_TYPE_OV)
+      end
     end
   end
 end

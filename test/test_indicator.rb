@@ -47,4 +47,10 @@ class IndicatorTest < Stix2::Test
     end
     assert_equal "Invalid values: invalid1, invalid2", exception.message
   end
+
+  def test_confidence
+    assert Stix2::DomainObject::Indicator.new(confidence: 50)
+    exception = assert_raises(Stix2::Exception::InvalidRange) { Stix2::DomainObject::Indicator.new(confidence: 1000) }
+    assert_equal "Invalid value 1000 for range 0..100", exception.message
+  end
 end

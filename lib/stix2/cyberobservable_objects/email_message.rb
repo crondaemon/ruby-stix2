@@ -1,7 +1,7 @@
 module Stix2
   module CyberobservableObject
     class EmailMessage < Base
-      property :is_multipart, required: true, coerce: ->(value) { Stix2.to_bool(value) }
+      property :is_multipart, required: true, coerce: Stix2.bool
       property :date, coerce: Time
       property :content_type, coerce: String
       property :from_ref, coerce: Identifier

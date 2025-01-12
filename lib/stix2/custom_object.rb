@@ -14,7 +14,7 @@ module Stix2
         errors["Too long"] << key if key.size > 250
       end
       raise(Exception::CustomObjectCreationError.new(errors)) if !errors.empty?
-      super(options)
+      super
     end
   end
 end

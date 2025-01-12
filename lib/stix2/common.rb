@@ -12,36 +12,25 @@ module Stix2
     property :created_by_ref, coerce: Identifier
     property :created, coerce: Time
     property :modified, coerce: Time
-    property :revoked, coerce: ->(value) { Stix2.to_bool(value) }
+    property :revoked, coerce: Stix2.bool
     property :labels, coerce: [String]
-    property :confidence, coerce: ->(value) {
-                                    int = Integer(value)
-                                    [0..100].include?(int)
-                                    int
-                                  }
+    property :confidence, coerce: Integer
     property :lang, coerce: String
     property :external_references, coerce: [ExternalReference]
     property :object_marking_refs, coerce: [Stix2::MetaObject::DataMarking::ObjectMarking]
     property :granular_markings, coerce: [MetaObject::DataMarking::GranularMarking]
-    property :defanged, coerce: ->(value) { Stix2.to_bool(value) }
+    property :defanged, coerce: Stix2.bool
     property :extensions, coerce: Hash
 
     def initialize(options = {})
-      Hashie.symbolize_keys!(options)
-      type = to_dash(self.class.name.split("::").last)
-      if options[:type]
-        if !options[:type].start_with?("x-") && options[:type] != type
-          raise(Exception::BadType.new(type))
-        end
-      else
-        options[:type] = type
-      end
-
-      options[:id] ||= "#{type}--#{SecureRandom.uuid}"
-
+      options_ = options.dup
+      Hashie.symbolize_keys!(options_)
+      guess_type(options_)
+      autogenerate_id(options_)
       process_toplevel_property_extension(options[:extensions])
-      super(options)
-      process_extensions(options)
+      super(options_)
+      process_extensions(options_)
+      validate_confidence!
       Stix2::Storage.add(self)
     end
 
@@ -68,22 +57,36 @@ module Stix2
 
     private
 
+    def guess_type(options)
+      type = to_dash(self.class.name.split("::").last)
+      if options[:type]
+        if !options[:type].start_with?("x-") && options[:type] != type
+          raise(Exception::BadType.new(type))
+        end
+      else
+        options[:type] = type
+      end
+    end
+
+    def validate_confidence!
+      return if !confidence
+      valid_range = (0..100)
+      valid_range.include?(confidence) || raise(Exception::InvalidRange.new(valid_range, confidence))
+    end
+
+    def autogenerate_id(options)
+      options[:id] ||= "#{options[:type]}--#{SecureRandom.uuid}"
+    end
+
     def to_dash(string)
       string.gsub(/[[:upper:]]/) { "-#{$&.downcase}" }[1..]
     end
 
-    def self.validate_array(list, valid_values)
-      excess = (Array(list).map(&:to_s) - valid_values.map(&:to_s))
-      raise(Exception::InvalidValues.new(excess)) if !excess.empty?
-      list
-    end
-    private_class_method :validate_array
-
-    def self.hash_dict(hsh)
-      validate_array(hsh.keys, HASH_ALGORITHM_OV)
-      hsh
-    end
-    private_class_method :hash_dict
+    # def self.hash_dict(hsh)
+    #   validate_array(hsh.keys, HASH_ALGORITHM_OV)
+    #   hsh
+    # end
+    # private_class_method :hash_dict
 
     def process_toplevel_property_extension(extensions)
       extension_definition = extensions&.find { |key, val| key.to_s.start_with?("extension-definition") }
