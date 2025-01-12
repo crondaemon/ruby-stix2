@@ -8,7 +8,7 @@ module Stix2
       property :sighting_of_ref, required: true, coerce: String
       property :observed_data_refs, coerce: [String]
       property :where_sighted_refs, coerce: [String]
-      property :summary, coerce: ->(v) { Stix2.to_bool(v) }
+      property :summary, coerce: Stix2.bool
     end
   end
 end

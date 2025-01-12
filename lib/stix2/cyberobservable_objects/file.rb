@@ -1,7 +1,7 @@
 module Stix2
   module CyberobservableObject
     class File < Base
-      property :hashes, coerce: ->(hsh) { hash_dict(hsh) }
+      property :hashes, coerce: Hash
       property :size, coerce: Integer
       property :name, coerce: String
       property :name_enc, coerce: String
@@ -13,6 +13,17 @@ module Stix2
       property :parent_directory_ref, coerce: Identifier
       property :contains_refs, coerce: [Identifier]
       property :content_ref, coerce: Identifier
+
+      def initialize(args = {})
+        super
+        validate_hashes!
+      end
+
+      private
+
+      def validate_hashes!
+        Stix2::Validators::Hashes.new(hashes)
+      end
     end
   end
 end

@@ -4,7 +4,18 @@ module Stix2
       property :name, required: true, coerce: String
       property :size, coerce: Integer
       property :entropy, coerce: Float
-      property :hashes, coerce: ->(hsh) { hash_dict(hsh) }
+      property :hashes, coerce: Hash
+
+      def initialize(args = {})
+        super
+        validate_hashes!
+      end
+
+      private
+
+      def validate_hashes!
+        Stix2::Validators::Hashes.new(hashes)
+      end
     end
   end
 end

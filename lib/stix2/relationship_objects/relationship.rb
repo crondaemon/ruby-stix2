@@ -8,7 +8,7 @@ module Stix2
       property :start_time, coerce: Time
       property :stop_time, coerce: Time
 
-      def initialize(args)
+      def initialize(args = {})
         if !args[:relationship_type] && args[:source_ref] && args[:target_ref]
           objects = DOMAIN_OBJECTS + CYBEROBSERVABLE_OBJECTS
           source_type = type_by_id(args[:source_ref])
@@ -18,7 +18,7 @@ module Stix2
           args[:relationship_type] = relationships.first unless relationships.empty?
         end
 
-        super(args)
+        super
       end
 
       COMMON_RELATIONSHIPS = ["related-to", "derived-from", "duplicate-of"].freeze

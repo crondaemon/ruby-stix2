@@ -4,7 +4,7 @@ module Stix2
       class ObjectMarking < String
         def initialize(value)
           value.match(/marking-definition--.*/) || raise(Exception::InvalidValues.new(value))
-          super(value)
+          super
         end
       end
     end

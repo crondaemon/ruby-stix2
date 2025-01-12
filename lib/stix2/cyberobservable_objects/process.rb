@@ -1,7 +1,7 @@
 module Stix2
   module CyberobservableObject
     class Process < Base
-      property :is_hidden, coerce: ->(value) { Stix2.to_bool(value) }
+      property :is_hidden, coerce: Stix2.bool
       property :pid, coerce: Integer
       property :created_time, coerce: Time
       property :cwd, coerce: String

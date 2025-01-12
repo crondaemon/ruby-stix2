@@ -3,7 +3,18 @@ module Stix2
     class LanguageContent < Base
       property :object_ref, coerce: Identifier
       property :object_modified, coerce: Time
-      property :contents, coerce: ->(hsh) { validate_array(hsh.keys, Stix2::RFC5646_LANGUAGE_TAGS.keys) && hsh }
+      property :contents, coerce: Hash
+
+      def initialize(args = {})
+        super
+        validate_content!
+      end
+
+      private
+
+      def validate_content!
+        Stix2::Validators::Array.new(contents.keys, Stix2::RFC5646_LANGUAGE_TAGS.keys) if contents
+      end
     end
   end
 end

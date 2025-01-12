@@ -116,5 +116,16 @@ module Stix2
         "Property 'definition_type' and 'definition' must have a matching key"
       end
     end
+
+    class InvalidRange < Base
+      def initialize(valid_range, value)
+        @valid_range = valid_range
+        @value = value
+      end
+
+      def message
+        "Invalid value #{@value} for range #{@valid_range}"
+      end
+    end
   end
 end
