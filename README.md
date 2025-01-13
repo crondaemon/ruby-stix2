@@ -159,4 +159,4 @@ the development
 
 # See also
 
-Ruby Stix2: https://github.com/crondaemon/ruby-taxii2
+Ruby Taxii2: https://github.com/crondaemon/ruby-taxii2
