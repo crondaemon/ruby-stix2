@@ -19,6 +19,7 @@ module Stix2
         end
 
         super
+        validate_relationship_type!
       end
 
       COMMON_RELATIONSHIPS = ["related-to", "derived-from", "duplicate-of"].freeze
@@ -159,6 +160,10 @@ module Stix2
 
       def type_by_id(id)
         id.split("--").first
+      end
+
+      def validate_relationship_type!
+        relationship_type.match?(/[a-z0-9-]/) || raise(Exception::InvalidValues.new(relationship_type))
       end
     end
   end
