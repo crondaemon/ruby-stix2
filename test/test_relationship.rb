@@ -17,4 +17,15 @@ class RelationshipTest < Stix2::Test
       assert_match(/The property .* is required for Stix2::.*/, exception.message)
     end
   end
+
+  def test_invalid_relationship_type
+    exception = assert_raises(Stix2::Exception::InvalidValues) do
+      Stix2::RelationshipObject::Relationship.new(
+        relationship_type: "BAD",
+        source_ref: "indicator--1",
+        target_ref: "indicator--2"
+      )
+    end
+    assert_equal "Invalid value: BAD", exception.message
+  end
 end
