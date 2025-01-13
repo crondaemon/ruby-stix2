@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-stix2 (0.1.3)
+    ruby-stix2 (0.1.4)
       hashie (~> 5.0.0)
 
 GEM
