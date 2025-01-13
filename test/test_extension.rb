@@ -4,7 +4,6 @@ class ExtensionTest < Stix2::Test
   def test_top_level
     Stix2::Storage.activate
     extension_definition = Stix2::ExtensionDefinition.new(
-      id: "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1",
       type: "extension-definition",
       spec_version: "2.1",
       name: "Extension Foo 1a",
@@ -39,7 +38,7 @@ class ExtensionTest < Stix2::Test
       rank: 1, # This is a new property, defined by the previous extension
       toxicity: 2, # This is a new property, defined by the previous extension
       extensions: {
-        "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1": {
+        extension_definition.id => {
           extension_type: "toplevel-property-extension"
         }
       }
