@@ -13,3 +13,7 @@ module Stix2
     end
   end
 end
+
+Gem::Deprecate.skip_during do
+  Stix2::CustomObject.new
+end
