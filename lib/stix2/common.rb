@@ -54,8 +54,8 @@ module Stix2
       end
       # Retrieve the original method
       ref_method = m.to_s.gsub(/_instance$/, "")
-      obj = send(ref_method)
-      Stix2::Storage.find(obj)
+      obj_id = public_send(ref_method)
+      Stix2::Storage.find(obj_id)
     end
 
     def respond_to_missing?(method_name, include_private = false)
