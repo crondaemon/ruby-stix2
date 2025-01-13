@@ -35,13 +35,13 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_hashes!
-        validate_magic_hex!
-        validate_win32_version_value_hex!
-        validate_checksum_hex!
-        validate_subsystem_hex!
-        validate_dll_characteristics_hex!
-        validate_loader_flags_hex!
+        validate_hashes! if @strict
+        validate_magic_hex! if @strict
+        validate_win32_version_value_hex! if @strict
+        validate_checksum_hex! if @strict
+        validate_subsystem_hex! if @strict
+        validate_dll_characteristics_hex! if @strict
+        validate_loader_flags_hex! if @strict
       end
 
       private

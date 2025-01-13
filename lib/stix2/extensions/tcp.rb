@@ -6,8 +6,8 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_src_flags_hex!
-        validate_dst_flags_hex!
+        validate_src_flags_hex! if @strict
+        validate_dst_flags_hex! if @strict
       end
 
       private

@@ -25,12 +25,13 @@ module Stix2
     def initialize(options = {})
       options_ = options.dup
       Hashie.symbolize_keys!(options_)
+      set_strict(options_)
       guess_type(options_)
       autogenerate_id(options_)
       process_toplevel_property_extension(options[:extensions])
       super(options_)
       process_extensions(options_)
-      validate_confidence!
+      validate_confidence! if @strict
       Stix2::Storage.add(self)
     end
 
@@ -56,6 +57,11 @@ module Stix2
     end
 
     private
+
+    def set_strict(options_)
+      @strict = options_.fetch(:strict, false)
+      options_.delete(:strict)
+    end
 
     def guess_type(options)
       type = to_dash(self.class.name.split("::").last)

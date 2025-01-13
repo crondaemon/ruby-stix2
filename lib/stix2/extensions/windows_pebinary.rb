@@ -19,10 +19,10 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_file_header_hashes!
-        validate_machine_hex!
-        validate_pointer_to_symbol_table_hex!
-        validate_characteristics_hex!
+        validate_file_header_hashes! if @strict
+        validate_machine_hex! if @strict
+        validate_pointer_to_symbol_table_hex! if @strict
+        validate_characteristics_hex! if @strict
       end
 
       private

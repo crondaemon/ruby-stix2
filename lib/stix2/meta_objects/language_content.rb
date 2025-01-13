@@ -7,7 +7,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_content!
+        validate_content! if @strict
       end
 
       private

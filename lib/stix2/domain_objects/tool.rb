@@ -10,7 +10,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_tool_types!
+        validate_tool_types! if @strict
       end
 
       private

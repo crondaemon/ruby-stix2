@@ -23,7 +23,8 @@ class RelationshipTest < Stix2::Test
       Stix2::RelationshipObject::Relationship.new(
         relationship_type: "BAD",
         source_ref: "indicator--1",
-        target_ref: "indicator--2"
+        target_ref: "indicator--2",
+        strict: true
       )
     end
     assert_equal "Invalid value: BAD", exception.message

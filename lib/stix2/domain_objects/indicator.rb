@@ -14,7 +14,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_indicator_types!
+        validate_indicator_types! if @strict
       end
 
       private
