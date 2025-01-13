@@ -71,23 +71,23 @@ module Stix2
       end
     end
 
-    class CustomObjectPropertyCount < Base
+    class PropertyInvalidName < Base
+      def initialize(property_name)
+        @property_name = property_name
+      end
+
       def message
-        "A CustomObject must have at least one property"
+        "Invalid property name: #{@property_name}. Valid chars: a-z, 0-9 and _"
       end
     end
 
-    class CustomObjectCreationError < Base
-      def initialize(errors)
-        @errors = errors
+    class PropertyInvalidSize < Base
+      def initialize(property_name)
+        @property_name = property_name
       end
 
       def message
-        messages = ["Error creating CustomObject:"]
-        @errors.each do |message, value|
-          messages << "#{message}: #{value[0..20]}"
-        end
-        messages.join("\n")
+        "Invalid property size for #{@property_name}. Size must be > 3 and < 250"
       end
     end
 
