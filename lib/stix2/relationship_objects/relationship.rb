@@ -19,7 +19,7 @@ module Stix2
         end
 
         super
-        validate_relationship_type!
+        validate_relationship_type! if @strict
       end
 
       COMMON_RELATIONSHIPS = ["related-to", "derived-from", "duplicate-of"].freeze

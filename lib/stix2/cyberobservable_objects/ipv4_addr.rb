@@ -9,7 +9,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_ipv4!
+        validate_ipv4! if @strict
       end
 
       private

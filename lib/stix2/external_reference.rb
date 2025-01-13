@@ -8,7 +8,7 @@ module Stix2
 
     def initialize(args = {})
       super
-      validate_hashes!
+      validate_hashes! if @strict
     end
 
     private

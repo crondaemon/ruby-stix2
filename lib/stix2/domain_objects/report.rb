@@ -9,7 +9,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_report_types!
+        validate_report_types! if @strict
       end
 
       private

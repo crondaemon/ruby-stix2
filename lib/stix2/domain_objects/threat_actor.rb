@@ -17,10 +17,10 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_threat_actor_types!
-        validate_roles!
-        validate_secondary_motivations!
-        validate_personal_motivations!
+        validate_threat_actor_types! if @strict
+        validate_roles! if @strict
+        validate_secondary_motivations! if @strict
+        validate_personal_motivations! if @strict
       end
 
       private

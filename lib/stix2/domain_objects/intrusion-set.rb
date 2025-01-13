@@ -13,7 +13,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_secondary_motivations!
+        validate_secondary_motivations! if @strict
       end
 
       private

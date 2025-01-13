@@ -43,14 +43,14 @@ class IndicatorTest < Stix2::Test
 
   def test_invalid_values
     exception = assert_raises(Stix2::Exception::InvalidValues) do
-      Stix2::DomainObject::Indicator.new(indicator_types: ["invalid1", "invalid2"])
+      Stix2::DomainObject::Indicator.new(indicator_types: ["invalid1", "invalid2"], strict: true)
     end
     assert_equal "Invalid values: invalid1, invalid2", exception.message
   end
 
   def test_confidence
-    assert Stix2::DomainObject::Indicator.new(confidence: 50)
-    exception = assert_raises(Stix2::Exception::InvalidRange) { Stix2::DomainObject::Indicator.new(confidence: 1000) }
+    assert Stix2::DomainObject::Indicator.new(confidence: 50, strict: true)
+    exception = assert_raises(Stix2::Exception::InvalidRange) { Stix2::DomainObject::Indicator.new(confidence: 1000, strict: true) }
     assert_equal "Invalid value 1000 for range 0..100", exception.message
   end
 end

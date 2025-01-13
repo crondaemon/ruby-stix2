@@ -6,8 +6,8 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_icmp_type_hex!
-        validate_icmp_code_hex!
+        validate_icmp_type_hex! if @strict
+        validate_icmp_code_hex! if @strict
       end
 
       private

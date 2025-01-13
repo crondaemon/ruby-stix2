@@ -11,7 +11,7 @@ module Stix2
 
       def initialize(args = {})
         super
-        validate_infrastructure_types!
+        validate_infrastructure_types! if @strict
       end
 
       private
